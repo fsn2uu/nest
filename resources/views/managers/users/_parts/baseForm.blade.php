@@ -39,7 +39,7 @@
 
 <div class="field">
     <label for="role_id" class="label">Role</label>
-    <p class="control">
+    <p class="select is-fullwidth">
         <select name="role_id" id="role_id" class="select {{ $errors->has('role_id') ? 'is-danger' : '' }}" required>
             <option value="">Select a Role</option>
             @foreach(\App\Role::all() as $r)
