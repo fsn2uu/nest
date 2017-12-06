@@ -2,8 +2,6 @@
 
 @section('content')
 
-    <link rel="stylesheet" href="{{ asset('css/lightslider.min.css') }}">
-
     <div class="container">
         <div class="content">
             <div class="columns">
@@ -96,11 +94,17 @@
                 </div> {{-- /.column .is-three-quarters --}}
 
                 <div class="column is-one-quarter">
-                    <a href="{{ route('managers.units.edit', $unit->id) }}" class="button is-primary">Edit this Unit</a>
+                    <a href="{{ route('managers.units.edit', $unit->id) }}" class="button is-primary is-fullwidth m-b-15">Edit this Unit</a>
+                    <a class="button is-danger is-fullwidth">Delete this Unit</a>
                 </div> {{-- /.column .is-one-quarter --}}
             </div> {{-- /.columns --}}
         </div> {{-- /.content --}}
     </div> {{-- /.container --}}
+
+    <form action="{{ route('managers.units.destroy', $unit->id) }}" method="post" id="deleteForm">
+        {{ csrf_field() }}
+        {{ method_field('delete') }}
+    </form>
 
 @endsection
 
@@ -117,6 +121,17 @@
         auto: true,
         pause: 3000
     });
+
+    $('.is-danger').on('click', function(){
+        var conf = confirm("Are you sure?  This can't be undone.")
+
+        if(conf === true)
+        {
+            $('#deleteForm').submit()
+        }
+
+        return false
+    })
     </script>
 
 @endsection
