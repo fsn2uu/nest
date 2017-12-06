@@ -1,7 +1,3 @@
-order deny,allow
-deny from all
-allow from 73.42.34.77
-
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews
