@@ -2,51 +2,121 @@
 
 @section('content')
 
+    <link rel="stylesheet" href="{{ asset('css/lightslider.min.css') }}">
+
     <div class="container">
         <div class="content">
-            <div class="level">
-                <div class="level-left">
+            <div class="columns">
+                <div class="column is-three-quarters">
                     <h1>
                         {{ isset($unit->complex) ? $unit->complex->name.' ' : '' }}
                         {{ $unit->name ? $unit->name.' ' : '' }}
                         {{ $unit->unit_no ? 'Unit '.$unit->unit_no : '' }}
                     </h1>
-                </div>
 
-                <div class="level-right">
+                    <ul id="lightSlider">
+                        @foreach ($unit->photos as $photo)
+                            <li>
+                                <img src="{{ asset($photo->filename) }}" alt="Placeholder image">
+                            </li>
+                        @endforeach
+                    </ul>
+
+                    <div class="columns">
+                        <div class="column has-text-centered">
+                            <strong>Beds:</strong> {{ $unit->beds }}
+                        </div>
+
+                        <div class="column has-text-centered">
+                            <strong>Baths:</strong> {{ $unit->baths }}
+                        </div>
+
+                        <div class="column has-text-centered">
+                            <strong>Sleeps:</strong> {{ $unit->sleeps }}
+                        </div>
+
+                        <div class="column has-text-centered">
+                            <strong>Type:</strong> {{ $unit->type }}
+                        </div>
+
+                        <div class="column has-text-centered">
+                            <strong>Pet Friendly:</strong> {{ $unit->pet_friendly == 1 ? 'Yes' : 'No' }}
+                        </div>
+
+                    </div>
+
+                    {!! nl2br($unit->description) !!}
+
+                    @if ($unit->amenities)
+                        <h3>Unit Amenities</h3>
+                        {{ $unit->amenities }}
+                    @endif
+
+                    @if (@$unit->complex->amenities)
+                        <h3>Complex Amenities</h3>
+                        {{ $unit->complex->amenities }}
+                    @endif
+
+                    <h3>Availability</h3>
+                    [AVAIL CALENDARS GO HERE]
+
+                    <h3>Rates</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Daily Rate</th>
+                                <th>Weekly Rate</th>
+                            </tr>
+                        </thead>
+                        @if ($unit->schedule)
+                            @foreach ($unit->schedule->rates as $r)
+                                <tr>
+                                    <td>{{ $r->name }}</td>
+                                    <td>{{ $r->start }}</td>
+                                    <td>{{ $r->end }}</td>
+                                    <td>${{ number_format($r->daily, 2) }}</td>
+                                    <td>${{ number_format($r->weekly, 2) }}</td>
+                                </tr>
+                            @endforeach
+                        @elseif ($unit->complex->schedule)
+                            @foreach ($unit->complex->schedule->rates as $r)
+                                <tr>
+                                    <td>{{ $r->name }}</td>
+                                    <td>{{ $r->start }}</td>
+                                    <td>{{ $r->end }}</td>
+                                    <td>${{ number_format($r->daily, 2) }}</td>
+                                    <td>${{ number_format($r->weekly, 2) }}</td>
+                                </tr>
+                            @endforeach
+                        @endif
+                    </table>
+                </div> {{-- /.column .is-three-quarters --}}
+
+                <div class="column is-one-quarter">
                     <a href="{{ route('managers.units.edit', $unit->id) }}" class="button is-primary">Edit this Unit</a>
-                </div>
-            </div>
+                </div> {{-- /.column .is-one-quarter --}}
+            </div> {{-- /.columns --}}
+        </div> {{-- /.content --}}
+    </div> {{-- /.container --}}
 
-            @if($unit->description)
-                <h3>Unit Details</h3>
-                {!! nl2br($unit->description) !!}
-            @endif
+@endsection
 
-            <p>Bedrooms: {{ $unit->beds }}</p>
-            <p>Bathrooms: {{ $unit->baths }}</p>
-            <p>Sleeps: {{ $unit->sleeps }}</p>
+@section('scripts')
 
-            @if($unit->address)
-                <h3>Directions</h3>
-                <p>
-                    {{ $unit->address }}{{ ($unit->unit_no) ? ' Unit '.$unit->unit_no : '' }}<br>
-                    @if($unit->address2)
-                        {{ $unit->address2 }}<br>
-                    @endif
-                    {{ $unit->city }}, {{ $unit->state }}  {{ $unit->zip }}
-                </p>
-            @elseif($unit->complex_id)
-                <h3>Directions</h3>
-                <p>
-                    {{ $unit->complex->address }}<br>
-                    @if($unit->complex->address2)
-                        {{ $unit->complex->address2 }}<br>
-                    @endif
-                    {{ $unit->complex->city }}, {{ $unit->complex->state }}  {{ $unit->complex->zip }}
-                </p>
-            @endif
-        </div>
-    </div>
+    <script src="{{ asset('js/lightslider.min.js') }}"></script>
+    <script>
+    $('#lightSlider').lightSlider({
+        gallery: true,
+        item: 1,
+        loop: true,
+        slideMargin: 0,
+        thumbItem: 9,
+        auto: true,
+        pause: 3000
+    });
+    </script>
 
-@stop
+@endsection
