@@ -122,3 +122,26 @@
     </div> {{-- /.container --}}
 
 @endsection
+
+@section('scripts')
+
+    <script>
+        $(function(){
+            $('#start').datepicker({
+                minDate: 0,
+                onSelect: function (date)
+                {
+                    var date2 = $('#start').datepicker('getDate')
+                    date2.setDate(date2.getDate() + 2)
+                    $('#end').datepicker('setDate', date2)
+                    $('#end').datepicker('option', 'minDate', date2)
+                }
+            })
+
+            $('#end').datepicker({
+                minDate: $('#start').val() + 2
+            })
+        })
+    </script>
+
+@endsection

@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 
     <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
@@ -93,6 +94,8 @@
     <!-- Scripts -->
     <script src="https://js.stripe.com/v3/"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    
     @include('notifications.toast')
     @yield('scripts')
 </body>
