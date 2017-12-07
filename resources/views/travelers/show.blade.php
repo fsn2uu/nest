@@ -58,7 +58,7 @@
                     @endif
 
                     <h3>Availability</h3>
-                    [AVAIL CALENDARS GO HERE]
+                    {{ \App\Helpers\Calendar::draw('12', '2017') }}
 
                     <h3>Rates</h3>
                     <table class="table">
