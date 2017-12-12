@@ -49,7 +49,7 @@ class Unit extends Model
 
     public function photos()
     {
-        return $this->hasMany('\App\UnitPhoto');
+        return $this->hasMany('\App\UnitPhoto')->orderBy('order');
     }
 
     public function schedule()

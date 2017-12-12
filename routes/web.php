@@ -51,6 +51,7 @@ Route::prefix('manage')->namespace('managers')->middleware('role:managers')->gro
 
     Route::resource('complexes', 'ComplexController', ['as' => 'managers']);
     Route::resource('units', 'UnitController', ['as' => 'managers']);
+    Route::post('units/axios-photo-reorder', 'UnitController@axiosPhotoReorder')->name('managers.axios.units.photos.reorder');
     Route::resource('rates', 'RateController', ['as' => 'managers']);
     Route::resource('users', 'UserController', ['as' => 'managers']);
 

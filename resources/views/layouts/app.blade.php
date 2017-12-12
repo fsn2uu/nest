@@ -82,6 +82,7 @@
         @yield('content')
 
     </div>
+    
     <footer class="footer">
         <div class="container">
             <div class="content has-text-centered">
@@ -104,7 +105,7 @@
             $('#confirmMessage').html(message)
             $('#confirmationModal').addClass('is-active')
 
-            $('#confirmModalTrue').unbind('click')
+            $('#confirmModalTrue').unbind('click') //this keeps the callback from running multiple times
 
             $('#confirmModalTrue').click(function(){
                 $('#confirmationModal').removeClass('is-active')
@@ -112,7 +113,7 @@
                 return false
             });
 
-            $('#confirmModalFalse').unbind('click')
+            $('#confirmModalFalse').unbind('click') //this keeps the callback from running multiple times
 
             $('#confirmModalFalse').click(function(){
                 $('#confirmationModal').removeClass('is-active')
@@ -127,14 +128,13 @@
         <div class="modal-card">
             <header class="modal-card-head">
                 <p class="modal-card-title" id="confirmTitle"></p>
-                <button class="delete" aria-label="close"></button>
             </header>
             <section class="modal-card-body" id="confirmMessage">
 
             </section>
             <footer class="modal-card-foot">
-                <button class="button is-danger" id="confirmModalTrue">Confirm</button>
-                <button class="button" id="confirmModalFalse">Cancel</button>
+                <button class="button is-danger is-large" id="confirmModalTrue">Confirm</button>
+                <button class="button is-large is-pulled-right" id="confirmModalFalse">Cancel</button>
             </footer>
         </div>
     </div>

@@ -325,4 +325,15 @@ class UnitController extends Controller
 
         return redirect()->route('managers.units.index');
     }
+
+    public function axiosPhotoReorder(Request $request)
+    {
+        //dd($request);
+        foreach($request->images as $r):
+            //print_r($r); die();
+            if(@$r['id'] && @$r['id'] != ''):
+                $photo = UnitPhoto::find($r['id'])->update(['order' => $r['order']]);
+            endif;
+        endforeach;
+    }
 }
