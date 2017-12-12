@@ -31,19 +31,18 @@
 @section('scripts')
 
     <script>
-        $(function(){
-            $('.is-danger').on('click', function(e){
-                e.preventDefault();
-
-                var conf = confirm('Are you sure?  All information, pictures and units attached to this complex will be deleted.  This cannot be undone.');
-
-                if(conf === true)
+        $('.is-danger').click(function(e){
+            e.preventDefault();
+            modalConfirm(
+            "Are you sure?",
+            "<p>Are you sure you want to do this?  There are no whoopsies!</p><p><strong>All information, pictures and units attached to this complex will be deleted.</strong></p>",
+                function()
                 {
                     $('#deleteForm').submit();
-                }
-
-                return false;
-            });
+                },
+                function()
+                {}
+            )
         });
     </script>
 

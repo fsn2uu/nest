@@ -122,16 +122,19 @@
         pause: 3000
     });
 
-    $('.is-danger').on('click', function(){
-        var conf = confirm("Are you sure?  This can't be undone.")
-
-        if(conf === true)
-        {
-            $('#deleteForm').submit()
-        }
-
-        return false
-    })
+    $('.is-danger').click(function(e){
+        e.preventDefault();
+        modalConfirm(
+        "Are you sure?",
+        "<p>Are you sure you want to do this?  There are no whoopsies!</p>",
+            function()
+            {
+                $('#deleteForm').submit();
+            },
+            function()
+            {}
+        )
+    });
     </script>
 
 @endsection

@@ -97,6 +97,48 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
+    <script>
+        function modalConfirm(title, message, trueCallback, falseCallback)
+        {
+            $('#confirmTitle').text(title)
+            $('#confirmMessage').html(message)
+            $('#confirmationModal').addClass('is-active')
+
+            $('#confirmModalTrue').unbind('click')
+
+            $('#confirmModalTrue').click(function(){
+                $('#confirmationModal').removeClass('is-active')
+                trueCallback()
+                return false
+            });
+
+            $('#confirmModalFalse').unbind('click')
+
+            $('#confirmModalFalse').click(function(){
+                $('#confirmationModal').removeClass('is-active')
+                falseCallback()
+                return false
+            });
+        }
+    </script>
+
+    <div class="modal" id="confirmationModal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title" id="confirmTitle"></p>
+                <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body" id="confirmMessage">
+
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-danger" id="confirmModalTrue">Confirm</button>
+                <button class="button" id="confirmModalFalse">Cancel</button>
+            </footer>
+        </div>
+    </div>
+
     @include('notifications.toast')
     @yield('scripts')
 </body>
