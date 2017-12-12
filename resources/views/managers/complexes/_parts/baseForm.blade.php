@@ -68,7 +68,7 @@
 
 <div class="field">
     <label for="state" class="label">State</label>
-    <p class="control">
+    <div class="select">
         <select name="state" id="state" class="select" required>
             <option value="">Select a State</option>
             <option value="AL"{{ old('state') == 'AL' ? ' selected' : isset($complex) && $complex->state == 'AL' ? ' selected' : '' }}>
@@ -179,7 +179,7 @@
                 {{ $errors->first('state') }}
             </p>
         @endif
-    </p>
+    </div>
 </div>
 
 <div class="field">

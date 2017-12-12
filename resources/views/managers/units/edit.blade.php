@@ -87,15 +87,10 @@
 
                     axios.post('{{ route("managers.axios.units.photos.reorder") }}', {images: sortObject})
                     .then(function(response){
-                        console.log(response)
-                        //close the media modal
-                        //display the success message
                         notifications.success('Your photos have been reordered.')
                     })
                     .catch(function(error){
                         console.log(error)
-                        //close the media modal
-                        //display an error message
                         notifications.danger('Something went wrong.  Please try again.')
                     })
 

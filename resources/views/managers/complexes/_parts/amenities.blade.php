@@ -27,12 +27,13 @@ $amenities = [
     'Handicap Features',
 ];
 ?>
-
-<select name="amenities[]" id="amenities" class="select is-multiple is-fullwidth" multiple>
-    @foreach ($amenities as $amenity)
-        <option {{ old('amenities') && in_array($amenity, old('amenities')) ? 'selected' : isset($complex) && in_array($amenity, explode(', ', $complex->amenities)) ? 'selected' : '' }} value="{{ $amenity }}">{{ $amenity }}</option>
-    @endforeach
-</select>
+<div class="select is-multiple">
+    <select name="amenities[]" id="amenities" class="select is-multiple is-fullwidth" multiple>
+        @foreach ($amenities as $amenity)
+            <option {{ old('amenities') && in_array($amenity, old('amenities')) ? 'selected' : isset($complex) && in_array($amenity, explode(', ', $complex->amenities)) ? 'selected' : '' }} value="{{ $amenity }}">{{ $amenity }}</option>
+        @endforeach
+    </select>
+</div>
 
 <p class="help">
     These are the amenities for the complex, not the unit.  Hold ctrl (command on Mac) and click to select multiple amenities.
