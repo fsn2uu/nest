@@ -69,3 +69,25 @@
 
 
 @stop
+
+@section('scripts')
+
+    <script>
+    $('.is-danger').click(function(e){
+        e.preventDefault();
+        modalConfirm(
+        "Are you sure?",
+        "<p>Are you sure you want to do this?  There are no whoopsies!</p>",
+            function()
+            {
+                var formId = $(this).data("id");
+
+                $("#" + formId).submit();
+            },
+            function()
+            {}
+        )
+    });
+    </script>
+
+@endsection

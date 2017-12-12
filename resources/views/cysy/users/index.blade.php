@@ -81,18 +81,20 @@
 @section('scripts')
 
     <script>
-        $(function(){
-            $('.is-danger').on('click', function(e){
-                e.preventDefault();
-
-                var conf = confirm('Are you sure you want to do this?  There are no whoopsies!');
-
-                if(conf === true)
+        $('.is-danger').click(function(e){
+            e.preventDefault();
+            modalConfirm(
+            "Are you sure?",
+            "<p>Are you sure you want to do this?  There are no whoopsies!</p>",
+                function()
                 {
-                    var formId = $(this).data('id');
-                    $('#' + formId).submit();
-                }
-            });
+                    var formId = $(this).data("id");
+
+                    $("#" + formId).submit();
+                },
+                function()
+                {}
+            )
         });
     </script>
 
