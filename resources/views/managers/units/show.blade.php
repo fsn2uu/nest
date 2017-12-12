@@ -55,6 +55,36 @@
                         {{ $unit->complex->amenities }}
                     @endif
 
+<table class="table" style="width:300px;">
+    <tr>
+        <td>
+            <div style="width: 32px; height: 32px; padding: 3px; border-radius: 16px; background-color:blue; color:white; text-align: center">
+                30
+            </div>
+        </td>
+        <td>
+            1
+        </td>
+        <td>
+            1
+        </td>
+        <td>
+            1
+        </td>
+        <td>
+            1
+        </td>
+        <td>
+            1
+        </td>
+        <td>
+            1
+        </td>
+        <td>
+            1
+        </td>
+    </tr>
+</table>
                     <h3>Availability</h3>
                     {{ \App\Helpers\Calendar::draw('12', '2017') }}
 
