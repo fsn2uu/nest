@@ -23,9 +23,9 @@
         </div>
     </div>
 
-    <div class="modal" id="photoModal">
+    <div class="modal {{ Request::has('photos') ? 'is-active' : '' }}" id="photoModal">
         <div class="modal-background"></div>
-        <div class="modal-content" style="width:85%;">
+        <div class="modal-content" style="width:85%; min-height: 300px;">
             <p style="color:white;">
                 New photos will appear after you save the complex.
             </p>

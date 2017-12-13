@@ -116,7 +116,7 @@ class ComplexController extends Controller
      */
     public function show($id)
     {
-        $complex = Complex::where('id', $id)->where('company_id', Auth::user()->company_id)->first();
+        $complex = Complex::where('id', $id)->where('company_id', Auth::user()->company_id)->withCount('units')->first();
 
         if(Session::has('updateSuccess'))
         {
