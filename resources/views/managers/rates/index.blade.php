@@ -70,13 +70,7 @@
                     </div>
                 </div>
             @endif
-
-
-
-
         </div>
     </div>
-
-
 
 @stop

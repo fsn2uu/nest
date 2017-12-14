@@ -122,10 +122,9 @@
 </div>
 
 <div class="form-check">
-  <label class="form-check-label">
-    <input class="form-check-input" type="checkbox" name="pet_friendly" value="1"{{ (@$unit->pet_friendly == 1) ? ' checked' : '' }}>
-    Pet Friendly
-  </label>
+    <b-checkbox class="form-check-input" type="checkbox" name="pet_friendly" value="1"{{ (@$unit->pet_friendly == 1) ? ' checked' : '' }}>
+        Pet Friendly
+    </b-checkbox>
 </div>
 
 <div class="field">

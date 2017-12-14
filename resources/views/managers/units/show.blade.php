@@ -2,6 +2,30 @@
 
 @section('content')
 
+    Todo:<br>
+    <ol>
+        <li>
+            get a freaking domain name.
+        </li>
+        <li>
+            move photos to amazon s3
+            <ol>
+                <li>
+                    https://www.youtube.com/watch?v=HDxCDdZFh9g
+                </li>
+                <li>
+                    https://laravel.com/docs/5.4/filesystem
+                </li>
+                <li>
+                    https://github.com/thephpleague/flysystem-aws-s3-v3
+                </li>
+            </ol>
+        </li>
+        <li>
+            get reservations working
+        </li>
+    </ol>
+
     <div class="container">
         <div class="content">
             <div class="columns">
