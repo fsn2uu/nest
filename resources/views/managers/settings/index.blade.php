@@ -65,7 +65,7 @@
             var section = $(this).attr('data-section')
 
             $.each('.tab-panel', function(e){
-                e.css({'display', 'none'})
+                e.css('display', 'none')
             })
         })
     </script>
