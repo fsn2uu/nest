@@ -28,7 +28,8 @@
                 </ul>
             </div>
 
-            <div id="general" class="tab-panel">
+
+            <div class="tab-wrapper"><div id="general" class="tab-panel">
                 general settings go here
             </div>
             <div id="subscription" class="tab-panel" style="display:none;">
@@ -51,7 +52,7 @@
             </div>
             <div id="developer" class="tab-panel" style="display:none;">
                 developer settings go here
-            </div>
+            </div></div>
 
         </div>
     </div>
@@ -64,7 +65,7 @@
         $('.tablink').click(function(){
             var section = $(this).attr('data-section')
 
-            $.each('.tab-panel', function(e){
+            $('.tab-wrapper').each('.tab-panel', function(e){
                 e.css('display', 'none')
             })
         })
