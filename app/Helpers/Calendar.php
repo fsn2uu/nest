@@ -59,13 +59,17 @@ class Calendar {
                 //loops through each week
                 for($i=0; $i < 7; $i++)
                 {
-                    if(in_array($tempDate->format('Y-m-d'), $res_dump))
+                    $r_class = '';
+
+                    if(is_array($res_dump) && count($res_dump) > 0)
                     {
-                        $r_class = 'unitReserved';
+                        if(in_array($tempDate->format('Y-m-d'), $res_dump))
+                        {
+                            $r_class = 'unitReserved';
+                        }
                     }
                     else
                     {
-                        $r_class = '';
                     }
 
                     $calendar .= '<td><span class="date '.$r_class.'">';
