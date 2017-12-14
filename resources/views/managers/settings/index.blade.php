@@ -65,9 +65,9 @@
         $('.tablink').click(function(){
             var section = $(this).attr('data-section')
 
-            $('.tab-wrapper').each('.tab-panel', function(e){
-                e.css('display', 'none')
-            })
+            $('.tab-panel').css('display', 'none')
+
+            $('#'+section).css('display', 'block')
         })
     </script>
 
