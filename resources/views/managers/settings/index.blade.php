@@ -19,6 +19,16 @@
                     </ul>
                 </li>
             </ul>
+
+            <div class="tabs is-medium">
+                <ul>
+                    <li class="is-active"><a>Pictures</a></li>
+                    <li><a>Music</a></li>
+                    <li><a>Videos</a></li>
+                    <li><a>Documents</a></li>
+                </ul>
+            </div>
+
             <h3>Nest Subscription Settings</h3>
             <form action="">
                 {{ csrf_field() }}
