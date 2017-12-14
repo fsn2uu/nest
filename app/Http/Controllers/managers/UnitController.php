@@ -300,6 +300,7 @@ class UnitController extends Controller
             $stuff['amenities'] = implode(', ', $request->amenities);
         }
 
+        //let's build a slug and a friendly looking name for the front end
         $unit_friendly_name = '';
 
         if($request->complex_id)
