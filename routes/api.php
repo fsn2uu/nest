@@ -19,15 +19,16 @@ use App\Company;
 //     return $request->user();
 // });
 
-Route::post('/test', function(Request $request){
+Route::post('/test', function(Request $request){  //CAN WE CONNECT?
         return json_encode('hello yourself');
 });
 
-Route::post('/units', function(Request $request){
+Route::post('/units', function(Request $request){ //NEED TO MOVE THIS TO A CONTROLLER
     $company = Company::where('api_key', $request->api_key)->first();
 
     $units = Unit::where('company_id', $company->id)
         ->where('status', 'published')
+        ->filter($request->args)
         ->with('photos')
         ->get()->toJson();
     return $units;
