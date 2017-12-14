@@ -66,4 +66,9 @@ class Unit extends Model
     {
         return \Carbon\Carbon::parse($this->attributes['updated_at']);
     }
+
+    public function reservations()
+    {
+        return $this->hasMany('\App\Reservation');
+    }
 }

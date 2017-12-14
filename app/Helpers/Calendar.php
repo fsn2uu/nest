@@ -3,12 +3,27 @@
 namespace App\Helpers;
 
 use Carbon\Carbon;
+use App\Reservation;
 
 class Calendar {
-    public static function draw($month, $year)
+    public static function draw($month, $year, $unit_id = null)
     {
         $tempDate = Carbon::createFromDate($year, $month, 1);
         $currentDate = Carbon::createFromDate($year, $month, 1);
+        $sixout = Carbon::createFromDate($year, $month, 1)->addMonths(5)->lastOfMonth();
+
+        $reservations = Reservation::select('date')
+            ->where('unit_id', $unit_id)
+            ->where('date', '>=', $currentDate->format('Y-m-d'))
+            ->where('date', '<=', $sixout->format('Y-m-d'))
+            ->get()->toArray();
+
+        $res_dump = '';
+
+        foreach($reservations as $res)
+        {
+            $res_dump[] = $res['date'];
+        }
 
         $calendar = '<div class="columns">';
         for($ii = 1; $ii <= 6; $ii++):
@@ -44,7 +59,16 @@ class Calendar {
                 //loops through each week
                 for($i=0; $i < 7; $i++)
                 {
-                    $calendar .= '<td><span class="date">';
+                    if(in_array($tempDate->format('Y-m-d'), $res_dump))
+                    {
+                        $r_class = 'unitReserved';
+                    }
+                    else
+                    {
+                        $r_class = '';
+                    }
+
+                    $calendar .= '<td><span class="date '.$r_class.'">';
 
                     if($tempDate->month == $currentDate->month):
                         $calendar .= $tempDate->day;
