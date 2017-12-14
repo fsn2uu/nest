@@ -22,30 +22,52 @@
 
             <div class="tabs is-medium">
                 <ul>
-                    <li class="is-active"><a>Pictures</a></li>
-                    <li><a>Music</a></li>
-                    <li><a>Videos</a></li>
-                    <li><a>Documents</a></li>
+                    <li class="is-active"><a class="tablink" data-section="general">General</a></li>
+                    <li><a class="tablink" data-section="subscription">Subscription</a></li>
+                    <li><a class="tablink" data-section="developer">Developer</a></li>
                 </ul>
             </div>
 
-            <h3>Nest Subscription Settings</h3>
-            <form action="">
-                {{ csrf_field() }}
-                <div class="select">
-                    <select name="plan_id" id="plan_id">
-                        <option value="">Select a Plan</option>
-                        @foreach ($plans->data as $plan)
-                            @if (in_array($plan->id, ['nest-1', 'nest-2', 'nest-3']))
-                                <option value="{{ $plan->id }}"
-                                    {{ $cplan == $plan->id ? 'selected' : '' }}
-                                    >{{ $plan->name }}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                </div>
-            </form>
+            <div id="general" class="tab-panel">
+                general settings go here
+            </div>
+            <div id="subscription" class="tab-panel" style="display:none;">
+                <h3>Nest Subscription Settings</h3>
+                <form action="">
+                    {{ csrf_field() }}
+                    <div class="select">
+                        <select name="plan_id" id="plan_id">
+                            <option value="">Select a Plan</option>
+                            @foreach ($plans->data as $plan)
+                                @if (in_array($plan->id, ['nest-1', 'nest-2', 'nest-3']))
+                                    <option value="{{ $plan->id }}"
+                                        {{ $cplan == $plan->id ? 'selected' : '' }}
+                                        >{{ $plan->name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+                    </form>
+            </div>
+            <div id="developer" class="tab-panel" style="display:none;">
+                developer settings go here
+            </div>
+
         </div>
     </div>
+
+@endsection
+
+@section('scripts')
+
+    <script>
+        $('.tablink').click(function(){
+            var section = $(this).attr('data-section')
+
+            $('.tab-panel').each(function(e){
+                e.css({display: 'none'})
+            })
+        })
+    </script>
 
 @endsection
