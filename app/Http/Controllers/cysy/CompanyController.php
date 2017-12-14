@@ -71,6 +71,8 @@ class CompanyController extends Controller
         if($company = Company::create($request->except(['_token', 'logo'])))
         {
             $company->update(['slug' => str_slug($company->name)]);
+            $company->update(['api_key' => str_random(45)]);
+            $company->update(['token_id' => str_random(45)]);
 
             if($request->logo)
             {
@@ -167,7 +169,7 @@ class CompanyController extends Controller
         if($company->update($request->except(['_token', '_method', 'logo'])))
         {
             $company->update(['slug' => str_slug($company->name)]);
-            
+
             if($request->logo)
             {
                 $filename = $request->logo->store('public/companies');

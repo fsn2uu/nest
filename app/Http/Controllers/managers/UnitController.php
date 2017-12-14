@@ -5,6 +5,7 @@ namespace App\Http\Controllers\managers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Unit as Unit;
+use App\Complex;
 use App\UnitPhoto as UnitPhoto;
 use Validator;
 use Auth;
@@ -141,6 +142,38 @@ class UnitController extends Controller
         $unit->status = $request->status;
         $unit->amenities = implode(', ', $request->amenities);
 
+        $unit_friendly_name = '';
+
+        if($request->complex_id)
+        {
+            $unit_friendly_name .= Complex::find($request->complex_id)->name . ' ';
+        }
+
+        if($request->name)
+        {
+            $unit_friendly_name .= $request->name . ' ';
+        }
+
+        if($request->unit_no)
+        {
+            $unit_friendly_name .= 'Unit ' . $request->unit_no;
+        }
+
+        $unit->friendly_name = $unit_friendly_name;
+        $unit->slug = str_slug($unit_friendly_name);
+
+        //is the slug unique?
+        if(Unit::where('slug', $unit->slug)->count() > 0)
+        {
+            $i = 1;
+            do
+            {
+                $i++;
+            }while(Unit::where('slug', $unit->slug.'-'.$i)->count() > 0);
+
+            $unit->slug = $unit->slug . '-' . $i;
+        }
+
         if($unit->save())
         {
             if($request->photos != '')
@@ -262,7 +295,42 @@ class UnitController extends Controller
             $stuff['pet_friendly'] = null;
         }
 
-        $stuff['amenities'] = implode(', ', $request->amenities);
+        if($request->has('amenities'))
+        {
+            $stuff['amenities'] = implode(', ', $request->amenities);
+        }
+
+        $unit_friendly_name = '';
+
+        if($request->complex_id)
+        {
+            $unit_friendly_name .= Complex::find($request->complex_id)->name . ' ';
+        }
+
+        if($request->name)
+        {
+            $unit_friendly_name .= $request->name . ' ';
+        }
+
+        if($request->unit_no)
+        {
+            $unit_friendly_name .= 'Unit ' . $request->unit_no;
+        }
+
+        $stuff['friendly_name'] = $unit_friendly_name;
+        $stuff['slug'] = str_slug($unit_friendly_name);
+
+        //is the slug unique?
+        if(Unit::where('slug', $stuff['slug'])->count() > 0)
+        {
+            $i = 1;
+            do
+            {
+                $i++;
+            }while(Unit::where('slug', $stuff['slug'].'-'.$i)->count() > 0);
+
+            $stuff['slug'] = $stuff['slug'] . '-' . $i;
+        }
 
         if($unit = Unit::whereId($id)->update($stuff))
         {

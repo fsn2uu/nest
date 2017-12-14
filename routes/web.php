@@ -1,5 +1,7 @@
 <?php
 
+use \App\Unit;
+
 Route::get('/', function () {
     return view('travelers.index');
 })->name('index');
@@ -46,7 +48,12 @@ Route::prefix('cysy')->namespace('cysy')->middleware(['role:cysy'])->group(funct
 Route::prefix('manage')->namespace('managers')->middleware('role:managers')->group(function(){
 
     Route::get('/', function(){
-        return view('managers.index');
+        $units = Unit::where('company_id', Auth::user()->company_id)
+        ->where('status', 'published')
+        ->get();
+
+        return view('managers.index')
+            ->withUnits($units);
     })->name('managers.dashboard');
 
     Route::resource('complexes', 'ComplexController', ['as' => 'managers']);

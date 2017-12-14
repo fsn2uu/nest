@@ -18,9 +18,9 @@ class ApiAuth
      */
     public function handle($request, Closure $next)
     {
-        if(Company::where('api_key', $request->api_key)->count() > 0) //is the key valid?
+        if(Company::where('api_key', $request->api_key)->where('token_id', $request->token_id)->count() > 0) //is the key valid?
         {
-            $company = Company::where('api_key', $request->api_key)->first();
+            $company = Company::where('api_key', $request->api_key)->where('token_id', $request->token_id)->first();
 
             if($company->status == 'active') //is the company active?
             {
@@ -37,7 +37,7 @@ class ApiAuth
         {
             $response = new JsonResponse;
             $response->setStatusCode(403);
-            return $response->setData(['message' => 'The API key or user is invalid.']);
+            return $response->setData(['message' => 'The API key, token ID, or user is invalid.']);
         }
     }
 }

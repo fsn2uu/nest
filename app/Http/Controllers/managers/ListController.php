@@ -61,6 +61,8 @@ class ListController extends Controller
         $company = new Company;
         $company->name = $request->company_name;
         $company->slug = str_slug($request->company_name);
+        $company->api_key = str_random(45);
+        $company->token_id = str_random(45);
         $company->phone = $request->company_phone;
         $company->email = $request->company_email;
         $company->address = $request->company_address;
