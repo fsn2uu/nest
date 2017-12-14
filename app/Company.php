@@ -35,6 +35,11 @@ class Company extends Model
         return $this->hasMany('\App\Unit');
     }
 
+    public function apiUnits()
+    {
+        return $this->hasMany('\App\Unit')->with('\App\UnitPhoto');
+    }
+
     public function schedules()
     {
         return $this->hasMany('\App\Schedule');
