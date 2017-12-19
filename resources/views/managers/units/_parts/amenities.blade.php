@@ -1,7 +1,6 @@
 <h4>Amenities</h4>
-
 <div class="select is-multiple is-fullwidth">
-    <select name="amenities[]" id="amenities" class="select is-multiple is-fullwidth" multiple>
+    <select name="amenities[]" id="amenities" multiple>
         <option {{ old('amenities') && in_array('Balcony', old('amenities')) ? 'selected' : isset($unit) && in_array('Balcony', explode(',', $unit->amenities)) ? 'selected' : '' }} value="Balcony">Balcony</option>
         <option {{ old('amenities') && in_array('patio', old('amenities')) ? 'selected' : isset($unit) && in_array('patio', explode(',', $unit->amenities)) ? 'selected' : '' }} value="patio">Patio</option>
         <option {{ old('amenities') && in_array('Full Bar', old('amenities')) ? 'selected' : isset($unit) && in_array('Full Bar', explode(',', $unit->amenities)) ? 'selected' : '' }} value="Full Bar">Full Bar</option>

@@ -104,6 +104,14 @@
             $( "#sortable" ).disableSelection();
         } );
 
+        $('.tablink').click(function(){
+            var section = $(this).attr('data-section')
+
+            $('.tab-panel').css('display', 'none')
+
+            $('#'+section).css('display', 'block')
+        })
+
         $("#editPhotos").click(function(){
             $('#photoModal').addClass('is-active')
         })

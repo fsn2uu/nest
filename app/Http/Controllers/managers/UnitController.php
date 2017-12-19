@@ -182,7 +182,7 @@ class UnitController extends Controller
                 $i = 1;
                 foreach($request->photos as $photo)
                 {
-                    $filename = $photo->store('public/units', 'public');
+                    $filename = Storage::put('units', $photo, 'public');
 
                     UnitPhoto::create(
                         [
@@ -357,7 +357,6 @@ class UnitController extends Controller
             {
                 foreach($request->photos as $photo)
                 {
-                    //$filename = $photo->store('units', 'public');
                     $filename = Storage::put('units', $photo, 'public');
 
                     UnitPhoto::create(

@@ -24,7 +24,8 @@ class ComplexController extends Controller
 
         if(Session::has('deleted'))
         {
-            LaraFlash::add('The complex has been deleted.', ['title' => 'It was good while it lasted.', 'priority' => 3, 'type' => 'info']);
+            LaraFlash::add('The complex has been deleted.',
+            ['title' => 'It was good while it lasted.', 'priority' => 3, 'type' => 'info']);
         }
 
         return view('managers.complexes.index')
@@ -40,7 +41,8 @@ class ComplexController extends Controller
     {
         if(Session::has('updateFailed') || Session::has('createFailed'))
         {
-            LaraFlash::add('Something went wrong.  Check your data and try again.', ['title' => 'Well, that didn\'t work!', 'priority' => 5, 'type' => 'danger']);
+            LaraFlash::add('Something went wrong.  Check your data and try again.',
+            ['title' => 'Well, that didn\'t work!', 'priority' => 5, 'type' => 'danger']);
         }
 
         return view('managers.complexes.create');
@@ -83,12 +85,12 @@ class ComplexController extends Controller
             $i = 1;
             foreach($request->photos as $photo)
             {
-                $filename = $photo->store('public/complexes');
+                $filename = Storage::put('complexes', $photo, 'public');
 
                 ComplexPhoto::create(
                     [
                         'complex_id'    => $complex->id,
-                        'filename'      => str_replace('public', 'storage', $filename),
+                        'filename'      => $filename,
                         'order'         => $i,
                     ]
                 );
@@ -120,15 +122,18 @@ class ComplexController extends Controller
 
         if(Session::has('updateSuccess'))
         {
-            LaraFlash::add($complex->name . ' was Successfully Updated', array('title' => 'Yay! ', 'priority' => 3, 'type' => 'success'));
+            LaraFlash::add($complex->name . ' was Successfully Updated',
+            array('title' => 'Yay! ', 'priority' => 3, 'type' => 'success'));
         }
         elseif(Session::has('updateFailed') || Session::has('createFailed'))
         {
-            LaraFlash::add('Something went wrong.  Check your data and try again.', ['title' => 'Well, that didn\'t work!', 'priority' => 5, 'type' => 'danger']);
+            LaraFlash::add('Something went wrong.  Check your data and try again.',
+            ['title' => 'Well, that didn\'t work!', 'priority' => 5, 'type' => 'danger']);
         }
         elseif(Session::has('createSuccess'))
         {
-            LaraFlash::add($complex->name . ' was Successfully Created', array('title' => 'Yay! ', 'priority' => 3, 'type' => 'success'));
+            LaraFlash::add($complex->name . ' was Successfully Created',
+            array('title' => 'Yay! ', 'priority' => 3, 'type' => 'success'));
         }
 
         return view('managers.complexes.show')
@@ -147,7 +152,8 @@ class ComplexController extends Controller
 
         if(Session::has('updateFailed') || Session::has('createFailed'))
         {
-            LaraFlash::add('Something went wrong.  Check your data and try again.', ['title' => 'Well, that didn\'t work!', 'priority' => 5, 'type' => 'danger']);
+            LaraFlash::add('Something went wrong.  Check your data and try again.',
+            ['title' => 'Well, that didn\'t work!', 'priority' => 5, 'type' => 'danger']);
         }
 
         return view('managers.complexes.edit')
@@ -210,7 +216,10 @@ class ComplexController extends Controller
      */
     public function destroy($id)
     {
-        $complex = Complex::where('id', $id)->where('company_id', Auth::user()->company_id)->first()->delete();
+        $complex = Complex::where('id', $id)
+                ->where('company_id', Auth::user()->company_id)
+                ->first()
+                ->delete();
 
         Session::flash('deleted', 'message');
 
