@@ -59,7 +59,11 @@
             <ul id="sortable">
                 @foreach($unit->photos as $photo)
                     <li>
-                        <img src="{{ asset($photo->filename) }}" class="ui-state-default" alt="" style="width:95%;" data-imageId="{{ $photo->id }}">
+                        <?php
+                        $path = 'https://s3.'. env('AWS_REGION') .'.amazonaws.com/';
+                        $path .= env('AWS_BUCKET') .'/'. $photo->filename;
+                        ?>
+                        <img src="{{ $path }}" class="ui-state-default" alt="" style="width:95%;" data-imageId="{{ $photo->id }}">
                     </li>
                 @endforeach
             </ul>

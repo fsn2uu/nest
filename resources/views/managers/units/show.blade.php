@@ -16,7 +16,10 @@
                         @foreach ($unit->photos as $photo)
                             @if ($photo->filename != 'hello')
                                 <li class="lslide">
-                                    <?php $path = 'https://s3.'. env('AWS_REGION') .'.amazonaws.com/'. env('AWS_BUCKET') .'/'. $photo->filename; ?>
+                                    <?php
+                                    $path = 'https://s3.'. env('AWS_REGION') .'.amazonaws.com/';
+                                    $path .= env('AWS_BUCKET') .'/'. $photo->filename;
+                                    ?>
                                     <img src="{{ $path }}" alt="Placeholder image">
                                 </li>
                             @endif
@@ -113,17 +116,16 @@
 
 @section('scripts')
 
-    <script src="{{ asset('js/lightslider.js') }}"></script>
+    <script src="{{ asset('js/lightslider.min.js') }}"></script>
+
     <script>
-    $(document).ready(function(){
-        $('#lightSlider').lightSlider({
-            item: 1,
-            loop: true,
-            slideMargin: 0,
-            auto: true,
-            pause: 3000
-        });
-    })
+    $('#lightSlider').lightSlider({
+        item: 1,
+        loop: true,
+        slideMargin: 0,
+        auto: true,
+        pause: 3000
+    });
 
     $('.is-danger').click(function(e){
         e.preventDefault();

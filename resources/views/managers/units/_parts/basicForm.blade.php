@@ -315,7 +315,7 @@
     </p>
 </div>
 
-<label for="" class="label">Photos</label>
+<label for="" class="label">Photos<i class="fa fa-info-circle pic-help m-l-15"></i></label>
 <div class="file m-b-25">
   <label class="file-label">
     <input class="file-input" type="file" name="photos[]" multiple>
@@ -324,9 +324,10 @@
         <i class="fa fa-upload"></i>
       </span>
       <span class="file-label">
-        Choose your photos… <i class="fa fa-help pic-help"></i>[POPOVER]You can upload as many photos as you like, however, keep in mind that most travelers won't watch the photos for long.  Also, remember that photos must adhere to the quality standards you agreed to when you created your account.[/POPOVER]
+        Choose your photos…
       </span>
     </span>
   </label>
-  span
+
 </div>
+[POPOVER]You can upload as many photos as you like, however, keep in mind that most travelers won't watch the photos for long.  Also, remember that photos must adhere to the quality standards you agreed to when you created your account.[/POPOVER]

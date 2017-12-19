@@ -60,7 +60,14 @@
                                     <div class="card-image">
                                         <figure class="image is-4by3" style="margin-left:0; margin-right:0;">
                                             <a href="{{ route('show', $unit->id) }}">
-                                                <img src="{{ asset(@$unit->photos->first()->filename) }}" onerror="this.src='https://placehold.it/1280x960'" alt="Placeholder image">
+                                                <?php
+                                                $path = 'https://s3.'. env('AWS_REGION') .'.amazonaws.com/';
+                                                $path .= env('AWS_BUCKET') .'/'. @$unit->photos->first()->filename;
+                                                ?>
+                                                <img src="{{ $path }}"
+                                                    onerror="this.src='https://placehold.it/1280x960'"
+                                                    alt="Placeholder image"
+                                                    />
                                             </a>
                                         </figure>
                                     </div> {{-- /.card-image --}}

@@ -17,7 +17,11 @@
                     <ul id="lightSlider">
                         @foreach ($unit->photos as $photo)
                             <li>
-                                <img src="{{ asset($photo->filename) }}" alt="Placeholder image">
+                                <?php
+                                $path = 'https://s3.'. env('AWS_REGION') .'.amazonaws.com/';
+                                $path .= env('AWS_BUCKET') .'/'. $photo->filename;
+                                ?>
+                                <img src="{{ $path }}" alt="Placeholder image">
                             </li>
                         @endforeach
                     </ul>
