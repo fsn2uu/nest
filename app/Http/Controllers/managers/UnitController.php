@@ -4,6 +4,7 @@ namespace App\Http\Controllers\managers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use App\Unit as Unit;
 use App\Complex;
 use App\UnitPhoto as UnitPhoto;
@@ -181,12 +182,12 @@ class UnitController extends Controller
                 $i = 1;
                 foreach($request->photos as $photo)
                 {
-                    $filename = $photo->store('public/units');
+                    $filename = $photo->store('public/units', 'public');
 
                     UnitPhoto::create(
                         [
                             'unit_id'       => $unit->id,
-                            'filename'      => str_replace('public', 'storage', $filename),
+                            'filename'      => $filename,
                             'order'         => $i,
                         ]
                     );
@@ -356,12 +357,13 @@ class UnitController extends Controller
             {
                 foreach($request->photos as $photo)
                 {
-                    $filename = $photo->store('public/units');
+                    //$filename = $photo->store('units', 'public');
+                    $filename = Storage::put('units', $photo, 'public');
 
                     UnitPhoto::create(
                         [
                             'unit_id'       => $id,
-                            'filename'      => str_replace('public', 'storage', $filename),
+                            'filename'      => $filename,
                             'order'         => $max_order,
                         ]
                     );

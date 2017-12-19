@@ -82,7 +82,7 @@
         @yield('content')
 
     </div>
-    
+
     <footer class="footer">
         <div class="container">
             <div class="content has-text-centered">
@@ -97,6 +97,9 @@
     <script src="https://js.stripe.com/v3/"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    
+    @include('notifications.toast')
+    @yield('scripts')
 
     <script>
         function modalConfirm(title, message, trueCallback, falseCallback)
@@ -139,7 +142,5 @@
         </div>
     </div>
 
-    @include('notifications.toast')
-    @yield('scripts')
 </body>
 </html>

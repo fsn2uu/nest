@@ -324,8 +324,9 @@
         <i class="fa fa-upload"></i>
       </span>
       <span class="file-label">
-        Choose your photos…
+        Choose your photos… <i class="fa fa-help pic-help"></i>[POPOVER]You can upload as many photos as you like, however, keep in mind that most travelers won't watch the photos for long.  Also, remember that photos must adhere to the quality standards you agreed to when you created your account.[/POPOVER]
       </span>
     </span>
   </label>
+  span
 </div>

@@ -2,30 +2,6 @@
 
 @section('content')
 
-    Todo:<br>
-    <ol>
-        <li>
-            get a freaking domain name.
-        </li>
-        <li>
-            move photos to amazon s3
-            <ol>
-                <li>
-                    https://www.youtube.com/watch?v=HDxCDdZFh9g
-                </li>
-                <li>
-                    https://laravel.com/docs/5.4/filesystem
-                </li>
-                <li>
-                    https://github.com/thephpleague/flysystem-aws-s3-v3
-                </li>
-            </ol>
-        </li>
-        <li>
-            get reservations working
-        </li>
-    </ol>
-
     <div class="container">
         <div class="content">
             <div class="columns">
@@ -38,9 +14,12 @@
 
                     <ul id="lightSlider">
                         @foreach ($unit->photos as $photo)
-                            <li>
-                                <img src="{{ asset($photo->filename) }}" alt="Placeholder image">
-                            </li>
+                            @if ($photo->filename != 'hello')
+                                <li class="lslide">
+                                    <?php $path = 'https://s3.'. env('AWS_REGION') .'.amazonaws.com/'. env('AWS_BUCKET') .'/'. $photo->filename; ?>
+                                    <img src="{{ $path }}" alt="Placeholder image">
+                                </li>
+                            @endif
                         @endforeach
                     </ul>
 
@@ -134,17 +113,17 @@
 
 @section('scripts')
 
-    <script src="{{ asset('js/lightslider.min.js') }}"></script>
+    <script src="{{ asset('js/lightslider.js') }}"></script>
     <script>
-    $('#lightSlider').lightSlider({
-        gallery: true,
-        item: 1,
-        loop: true,
-        slideMargin: 0,
-        thumbItem: 9,
-        auto: true,
-        pause: 3000
-    });
+    $(document).ready(function(){
+        $('#lightSlider').lightSlider({
+            item: 1,
+            loop: true,
+            slideMargin: 0,
+            auto: true,
+            pause: 3000
+        });
+    })
 
     $('.is-danger').click(function(e){
         e.preventDefault();

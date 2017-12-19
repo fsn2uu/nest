@@ -21,6 +21,10 @@ Route::post('/list-your-properties/step-three', 'managers\ListController@stepThr
 
 Route::post('/list-your-properties/step-four', 'managers\ListController@stepFour')->name('list.step.four');
 
+Route::get('/quality-standards', function(){
+    return view('quality_standards');
+});
+
 Route::get('/terms-of-service', function(){
     return view('auth.manager_register.terms');
 })->name('terms');
